@@ -1,0 +1,187 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap');
+
+@layer base {
+  :root {
+    /* CIS-FI Dark Theme - Financial Intelligence */
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+
+    --card: 222 47% 8%;
+    --card-foreground: 210 40% 96%;
+
+    --popover: 222 47% 10%;
+    --popover-foreground: 210 40% 96%;
+
+    --primary: 173 58% 45%;
+    --primary-foreground: 222 47% 6%;
+
+    --secondary: 222 30% 14%;
+    --secondary-foreground: 210 40% 90%;
+
+    --muted: 222 30% 12%;
+    --muted-foreground: 215 20% 55%;
+
+    --accent: 173 58% 39%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 222 30% 16%;
+    --input: 222 30% 16%;
+    --ring: 173 58% 45%;
+
+    --radius: 0.5rem;
+
+    /* Custom semantic colors */
+    --conflict: 32 95% 55%;
+    --conflict-foreground: 222 47% 6%;
+    --consensus: 152 69% 45%;
+    --consensus-foreground: 222 47% 6%;
+    --uncertainty: 262 83% 58%;
+    --uncertainty-foreground: 210 40% 98%;
+    --neutral: 215 20% 55%;
+    
+    /* Graph colors */
+    --node-claim: 173 58% 45%;
+    --node-source: 262 83% 58%;
+    --edge-support: 152 69% 45%;
+    --edge-conflict: 32 95% 55%;
+    --edge-neutral: 215 20% 40%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(173 58% 45%), hsl(190 74% 55%));
+    --gradient-conflict: linear-gradient(135deg, hsl(32 95% 55%), hsl(16 85% 50%));
+    --gradient-consensus: linear-gradient(135deg, hsl(152 69% 45%), hsl(168 70% 50%));
+    --gradient-card: linear-gradient(180deg, hsl(222 47% 10%), hsl(222 47% 8%));
+    --gradient-glass: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+
+    /* Shadows */
+    --shadow-glow-primary: 0 0 30px -5px hsl(173 58% 45% / 0.3);
+    --shadow-glow-conflict: 0 0 20px -5px hsl(32 95% 55% / 0.4);
+    --shadow-glow-consensus: 0 0 20px -5px hsl(152 69% 45% / 0.4);
+    --shadow-card: 0 4px 24px -4px rgba(0,0,0,0.5);
+
+    --sidebar-background: 222 47% 7%;
+    --sidebar-foreground: 210 40% 90%;
+    --sidebar-primary: 173 58% 45%;
+    --sidebar-primary-foreground: 222 47% 6%;
+    --sidebar-accent: 222 30% 14%;
+    --sidebar-accent-foreground: 210 40% 90%;
+    --sidebar-border: 222 30% 14%;
+    --sidebar-ring: 173 58% 45%;
+  }
+
+  .dark {
+    --background: 222 47% 6%;
+    --foreground: 210 40% 96%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'IBM Plex Sans', sans-serif;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'IBM Plex Mono', monospace;
+  }
+}
+
+@layer components {
+  .glass-panel {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50 rounded-lg;
+    background: var(--gradient-glass);
+  }
+
+  .glow-primary {
+    box-shadow: var(--shadow-glow-primary);
+  }
+
+  .glow-conflict {
+    box-shadow: var(--shadow-glow-conflict);
+  }
+
+  .glow-consensus {
+    box-shadow: var(--shadow-glow-consensus);
+  }
+
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: var(--gradient-primary);
+  }
+
+  .status-badge {
+    @apply px-2 py-0.5 rounded-full text-xs font-medium;
+  }
+
+  .status-conflict {
+    @apply bg-conflict/20 text-conflict;
+  }
+
+  .status-consensus {
+    @apply bg-consensus/20 text-consensus;
+  }
+
+  .status-uncertainty {
+    @apply bg-uncertainty/20 text-uncertainty;
+  }
+
+  .data-grid {
+    @apply grid gap-4;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .metric-card {
+    @apply glass-panel p-4 transition-all duration-300 hover:border-primary/50;
+  }
+
+  .tech-button {
+    @apply inline-flex items-center gap-1.5 px-2 py-1 text-xs font-mono 
+           bg-secondary/50 hover:bg-secondary text-muted-foreground hover:text-foreground
+           rounded border border-border/50 transition-all duration-200;
+  }
+}
+
+@layer utilities {
+  .animate-pulse-slow {
+    animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+}
